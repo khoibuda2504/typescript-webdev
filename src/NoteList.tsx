@@ -20,12 +20,12 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       return (
-        ((title === "" ||
+        (title === "" ||
           note.title.toLowerCase().includes(title.toLowerCase())) &&
-          selectedTags.length === 0) ||
-        selectedTags.every((tag) =>
-          note.tags.some((noteTag) => noteTag.id === tag.id)
-        )
+        (selectedTags.length === 0 ||
+          selectedTags.every((tag) =>
+            note.tags.some((noteTag) => noteTag.id === tag.id)
+          ))
       );
     });
   }, [title, selectedTags, notes]);
